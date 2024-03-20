@@ -16,7 +16,17 @@ journalctl -e | grep 'error'
 journalctl -u kubelet | grep 'fail'
 
 
-**Certificate expiry or validity details **
+****Certificate expiry or validity details ****
 
 openssl x509 --noout -text -on <certficate-path >
+
+**Api Resources:**
+
+kubectl api-resources --namespaced
+kubectl api-resources --namespaced -o name
+
+**kubectl explain <RESOURCE>**
+
+kubectl explain pv.spec.persistentVolumeReclaimPolicy
+kubectl explain pv.spec.nodeAffinity.required
 
