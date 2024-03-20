@@ -1,0 +1,8 @@
+Status 
+       kubectl rollout status deployment/myapp-deployment
+       kubectl rollout history deployment/myapp-deployment
+       kubectl rollout status deployment/myapp-deploymnet --revision=3
+
+Rollback 
+    kubectl rollout undo deployment/myapp-deployment
+    kubectl rollout undo deployment/myapp-deployment --to-revision=1
