@@ -15,6 +15,13 @@ journalctl -e | grep 'error'
 
 journalctl -u kubelet | grep 'fail'
 
+journalctl -u kubelet -f
+
+journalctl -u kubelet --since "30 min ago" | grep 'Error:'
+
+
+kubectl get event --field-selector involvedObject.name=kube-controller-manager-cluster4-controlplane -n kube-system
+
 
 ****Certificate expiry or validity details ****
 
@@ -30,3 +37,6 @@ kubectl api-resources --namespaced -o name
 kubectl explain pv.spec.persistentVolumeReclaimPolicy
 kubectl explain pv.spec.nodeAffinity.required
 
+**Run test pod to check svc running in that namespace**
+
+ kubectl --context cluster3 run --rm  -i test-curl-pod --image=curlimages/curl --restart=Never -- curl -m 2 external-webserver-cka03-svcn
