@@ -23,3 +23,48 @@
           role: client
   ...
 It contains two elements in the from array, and allows connections from Pods in the local Namespace with the label role=client, or from any Pod in any namespace with the label user=alice.
+
+
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+
+  You can create a "default" ingress isolation policy for a namespace by creating a NetworkPolicy that selects all pods but does not allow any ingress traffic to those pods
+
+
+  ---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-all-ingress
+spec:
+  podSelector: {}
+  ingress:
+  - {}
+  policyTypes:
+  - Ingress
+
+  If you want to allow all incoming connections to all pods in a namespace, you can create a policy that explicitly allows that
+
+
+  apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-all-within-namespace
+spec:
+  podSelector:
+    matchLabels:
+      app: myapp
+  ingress:
+  - {}
+  policyTypes:
+  - Ingress
+
+  allows all traffic within local namespaces to pod having label app: myapp
