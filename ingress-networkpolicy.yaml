@@ -9,7 +9,6 @@ spec:
       role: db
   policyTypes:
   - Ingress
-  - Egress
   ingress:
   - from:
     - ipBlock:
